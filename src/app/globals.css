@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+  .Form-label{
+    @apply block font-semibold text-sm text-gray-600 pb-1;
+  }
+  .Form-input{
+    @apply border rounded-lg px-3 py-2 mt-1 mb-5 text-sm;
+  }
+  .Button-colored{
+    @apply bg-blue-500 text-white font-semibold px-2 py-2 rounded-lg hover:bg-blue-600 duration-200 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50;
+  }
+}
