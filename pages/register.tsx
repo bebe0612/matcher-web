@@ -1,10 +1,12 @@
-'use client'
+import PageHead from "@/components/pagehead";
 
 export default function Home() {
   const yearList = [];
   for (let i = 1960; i <= 2023; i++) yearList.push(i);
+  
   return (
     <div className="min-h-screen flex flex-col justify-center bg-sky-200">
+      <PageHead title="회원가입" />
       <div className="mx-auto w-full max-w-2xl">
         <div className="bg-white shadow w-full px-5 py-7 rounded-lg divide-y divide-gray-200">
           <div className="flex justify-center mb-2">
