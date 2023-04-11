@@ -21,7 +21,7 @@ export default function Home() {
               <input type="text" className="Form-input w-full" />
               <label className="Form-label">비밀번호</label>
               <input type="password" className="Form-input w-full" />
-              <input type="submit" value="로그인" className="text-orange-600 w-full py-2.5 rounded-lg text-sm shadow-sm font-semibold duration-200 border-solid border-gray-300 border bg-white hover:bg-gray-100 focus:shadow-sm focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50 " />
+              <input type="submit" value="로그인" className="w-full Button-white" />
             </form>
             <button onClick={() => router.push("/register")} type="button" className="mt-3 w-full Button-colored" >회원가입</button>
           </div>

@@ -10,6 +10,9 @@
     @apply border rounded-lg px-3 py-2 mt-1 mb-5 text-sm;
   }
   .Button-colored{
-    @apply bg-orange-400 text-white font-semibold px-2 py-2 rounded-lg hover:bg-orange-500 duration-200 focus:bg-orange-600 focus:shadow-sm focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50;
+    @apply bg-orange-400 text-white font-semibold p-2 text-sm shadow-sm rounded-lg duration-200 hover:bg-orange-500  focus:bg-orange-600 focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50;
+  }
+  .Button-white{
+    @apply bg-white text-orange-600 font-semibold p-2 text-sm shadow-sm rounded-lg duration-200 border-solid border-gray-300 border hover:bg-gray-100 focus:shadow-sm focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50;
   }
 }
