@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function NavBar({ school, year }: { school: string, year: number }) {
-
+  const router = useRouter();
   const currentID = "test-id";  // 동적으로 변경됨
 
   return (
@@ -21,7 +22,9 @@ export default function NavBar({ school, year }: { school: string, year: number 
           <Link href="">친구 목록</Link>
           <Link href="">설정</Link>
           <span>{currentID}</span>
-          <button type="button" onClick={() => { }} className="Button-colored">로그아웃</button>
+          <button type="button" onClick={() => {
+            router.push("/");
+          }} className="Button-colored">로그아웃</button>
         </div>
       </div>
     </nav>
