@@ -1,4 +1,9 @@
+import { useRouter } from "next/router";
+import Link from "next/link";
+
 export default function Login() {
+  const router = useRouter();
+
   return (
     <>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -84,9 +89,9 @@ export default function Login() {
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-500">
                 계정이 없나요?{" "}
-                <a className="underline" href="">
+                <Link className="underline" href="/sign-up">
                   여기를 눌러 회원 가입
-                </a>
+                </Link>
               </p>
 
               <button
