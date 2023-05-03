@@ -1,4 +1,24 @@
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+
+interface SignUpFormTypes {
+  email: string;
+  name: string;
+  password: string;
+  password_confirmation: string;
+  schoolName: string;
+  enrolledYear: any;
+  marketing_accept: boolean;
+}
+
 export default function SignUp() {
+  const yearList: any[] = [""];
+  for (let i = 1960; i <= 2023; i++) yearList.push(i);
+
+  const { register, watch, handleSubmit, formState: { errors } } = useForm<SignUpFormTypes>();
+  const FormSubmit = (data: SignUpFormTypes) => {
+    //API
+  }
   return (
     <>
       <section className="bg-white">
@@ -33,13 +53,13 @@ export default function SignUp() {
           >
             <div className="max-w-xl lg:max-w-3xl">
               <div className="relative -mt-16 block lg:hidden">
-                <a
+                <Link
                   className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
                   href="/"
                 >
                   <span className="sr-only">Home</span>
                   <img src="/logo2.png" width={40} />
-                </a>
+                </Link>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                   게더스쿨에 오신 것을 환영합니다! 🎉
@@ -51,21 +71,33 @@ export default function SignUp() {
                 </p>
               </div>
 
-              <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+              <form onSubmit={handleSubmit(FormSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
                   <label
-                    htmlFor="FirstName"
+                    htmlFor="Name"
                     className="block text-sm font-medium text-gray-700"
                   >
                     이름
                   </label>
 
                   <input
+                    {...register("name", {
+                      required: "이름을 입력해 주세요.",
+                      minLength: {
+                        value: 2,
+                        message: "이름은 2자 이상 10자 이하여야 합니다.",
+                      },
+                      maxLength: {
+                        value: 10,
+                        message: "이름은 2자 이상 10자 이하여야 합니다.",
+                      },
+                    })}
                     type="text"
-                    id="FirstName"
-                    name="first_name"
+                    id="Name"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
+
+                  <span className="text-xs font-medium text-red-600">{errors.name?.message}</span>
                 </div>
 
                 <div className="col-span-6">
@@ -77,11 +109,19 @@ export default function SignUp() {
                   </label>
 
                   <input
+                    {...register("email", {
+                      required: "이메일을 입력해 주세요.",
+                      maxLength: {
+                        value: 30,
+                        message: "이메일은 30자 이하여야 합니다.",
+                      }
+                    })}
                     type="email"
                     id="Email"
-                    name="email"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
+                  
+                  <span className="text-xs font-medium text-red-600">{errors.email?.message}</span>
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
@@ -93,11 +133,23 @@ export default function SignUp() {
                   </label>
 
                   <input
+                    {...register("password", {
+                      required: "비밀번호를 입력해 주세요",
+                      minLength: {
+                        value: 8,
+                        message: "비밀번호는 8자 이상 20자 이하여야 합니다.",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "비밀번호는 8자 이상 20자 이하여야 합니다.",
+                      }
+                    })}
                     type="password"
                     id="Password"
-                    name="password"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
+
+                  <span className="text-xs font-medium text-red-600">{errors.password?.message}</span>
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
@@ -109,19 +161,68 @@ export default function SignUp() {
                   </label>
 
                   <input
+                    {...register("password_confirmation", {
+                      validate: (value) => value === watch("password") || "패스워드가 일치하지 않습니다."
+                    })}
                     type="password"
                     id="PasswordConfirmation"
-                    name="password_confirmation"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
+
+                  <span className="text-xs font-medium text-red-600">{errors.password_confirmation?.message}</span>
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="SchoolName"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    출신 학교
+                  </label>
+
+                  <input
+                    {...register("schoolName", {
+                      required: "출신학교를 입력해 주세요.",
+                      maxLength: {
+                        value: 20,
+                        message: "학교명은 20자 이하여야 합니다.",
+                      }
+                    })}
+                    type="text"
+                    id="SchoolName"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  />
+
+                  <span className="text-xs font-medium text-red-600">{errors.schoolName?.message}</span>
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="EnrolledYear"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    졸업년도
+                  </label>
+                  <select
+                    {...register("enrolledYear", {
+                      required: "졸업년도를 선택해 주세요."
+                    })}
+                    id="EnrolledYear"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                    {yearList.map((year) => (
+                      <option key={year}>{year}</option>
+                    ))}
+                  </select>
+
+                  {errors.enrolledYear && <p className="text-xs font-medium text-red-600">{errors.enrolledYear?.message as string}</p>}
                 </div>
 
                 <div className="col-span-6">
                   <label htmlFor="MarketingAccept" className="flex gap-4">
                     <input
+                      {...register("marketing_accept")}
                       type="checkbox"
                       id="MarketingAccept"
-                      name="marketing_accept"
                       className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
                     />
 
@@ -152,9 +253,9 @@ export default function SignUp() {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     이미 계정이 있나요?{" "}
-                    <a href="#" className="text-gray-700 underline">
+                    <Link href="/" className="text-gray-700 underline">
                       로그인하러 가기
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>

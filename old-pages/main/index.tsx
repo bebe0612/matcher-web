@@ -1,6 +1,6 @@
 import { useState } from "react";
-import NavBar from "../components/navbar";
-import PageHead from "../components/pagehead";
+import NavBar from "../navbar";
+import PageHead from "../../pages/components/pagehead";
 
 export default function Main() {
   const [schoolInfo, setSchoolInfo] = useState({ name: "광운중학교", year: 2020 });
