@@ -16,3 +16,70 @@
     @apply bg-white text-orange-600 font-semibold p-2 text-sm shadow-sm rounded-lg duration-200 border-solid border-gray-300 border hover:bg-gray-100 focus:shadow-sm focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50;
   }
 }
+
+#comment .ck-editor__editable {
+  min-height: 200px;
+  border: 1px solid #ccc;
+}
+
+#editor  .ck-editor__editable {
+  min-height: 500px;
+  border: 1px solid #ccc;
+}
+
+.ck-content h2{
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+}
+
+.ck-content h3{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.ck-content h4{
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  margin-bottom: 6px;
+}
+
+.ck-content p{
+  font-size: 1.1rem;
+  font-weight: 300;
+  padding-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.ck-content ul {
+  margin: 10px 0 10px 0;
+}
+
+.ck-content ol {
+  margin: 10px 0 10px 0;
+}
+
+.ck-content ul li::before{
+  content: "•";
+  border-radius: 1ch;
+  padding-inline: 1ch;
+  margin-inline-end: 1ch;
+
+}
+
+.ck-content ol li{
+  display: list-item;
+}
+
+.ck-content ol li::before{
+  content: counter(list-item) ".";
+
+  border-radius: 1ch;
+  padding-inline: 1ch;
+  margin-inline-end: 1ch;
+
+}
