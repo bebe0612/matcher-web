@@ -1,9 +1,19 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+
+interface LoginFormTypes {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
   const router = useRouter();
 
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormTypes>();
+  const FormSubmit = (data: LoginFormTypes) => {
+    //API
+  }
   return (
     <>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -17,7 +27,7 @@ export default function Login() {
             </p>
           </div>
 
-          <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form onSubmit={handleSubmit(FormSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -25,6 +35,13 @@ export default function Login() {
 
               <div className="relative">
                 <input
+                  {...register("email", {
+                    required: "이메일을 입력해 주세요.",
+                    maxLength: {
+                      value: 30,
+                      message: "이메일은 30자 이하여야 합니다.",
+                    }
+                  })}
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="이메일을 입력해주세요"
@@ -47,6 +64,8 @@ export default function Login() {
                   </svg>
                 </span>
               </div>
+
+              <span className="text-xs p-4 font-medium text-red-600">{errors.email?.message}</span>
             </div>
 
             <div>
@@ -56,6 +75,9 @@ export default function Login() {
 
               <div className="relative">
                 <input
+                  {...register("password", {
+                    required: "비밀번호를 입력해 주세요.",
+                  })}
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="비밀번호를 입력해주세요."
@@ -84,6 +106,8 @@ export default function Login() {
                   </svg>
                 </span>
               </div>
+
+              <span className="text-xs p-4 font-medium text-red-600">{errors.password?.message}</span>
             </div>
 
             <div className="flex items-center justify-between">
@@ -96,7 +120,7 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium border border-blue-600 text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
               >
                 로그인
               </button>
