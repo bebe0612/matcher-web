@@ -1,7 +1,7 @@
 export default function SideMenu() {
   return (
     <div>
-      <div className="flex h-screen flex-col justify-between border-e bg-white w-60">
+      <div className="flex h-screen flex-col justify-between border-e bg-white w-60 sticky top-0">
         <div className="px-4 py-6">
           <img src="/logo.png" width={150} alt={""} className="mx-auto" />
 
