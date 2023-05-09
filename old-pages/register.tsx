@@ -1,4 +1,4 @@
-import PageHead from "../pages/components/pagehead";
+import PageHead from "../src/components/pagehead";
 
 export default function Home() {
   const yearList = [];

@@ -1,5 +1,5 @@
 import SignUp from "@/src/pages/sign-up";
-import PageHead from "../components/pagehead";
+import PageHead from "@/src/components/pagehead";
 
 export default function Index() {
   return (
