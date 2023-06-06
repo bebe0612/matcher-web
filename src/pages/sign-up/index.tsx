@@ -201,11 +201,11 @@ export default function SignUp() {
                     htmlFor="EnrolledYear"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    졸업년도
+                    입학년도
                   </label>
                   <select
                     {...register("enrolledYear", {
-                      required: "졸업년도를 선택해 주세요."
+                      required: "입학년도를 선택해 주세요."
                     })}
                     id="EnrolledYear"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
