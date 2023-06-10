@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 interface SignUpFormTypes {
   email: string;
@@ -7,17 +9,40 @@ interface SignUpFormTypes {
   password: string;
   password_confirmation: string;
   schoolName: string;
-  enrolledYear: any;
+  enrolledYear: number;
   marketing_accept: boolean;
 }
 
 export default function SignUp() {
+  const router = useRouter();
   const yearList: any[] = [""];
   for (let i = 1960; i <= 2023; i++) yearList.push(i);
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm<SignUpFormTypes>();
-  const FormSubmit = (data: SignUpFormTypes) => {
-    //API
+  const onSubmit = (data: SignUpFormTypes) => {
+    axios.post("http://ec2-13-124-183-78.ap-northeast-2.compute.amazonaws.com/v1/auth/signup", {
+      email: data.email,
+      name: data.name,
+      password: data.password,
+      schoolName: data.schoolName,
+      yearOfAdmission: data.enrolledYear,
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then((res) => {
+      console.log(res);
+      alert("회원 가입 완료. 로그인 페이지로 돌아갑니다.");
+      router.push("/")
+    }).catch((error) => {
+      console.log(error);
+      if (error.response) {
+        if (error.response.status === 409) alert(error.response.data.msg);
+        else alert("알 수 없는 이유로 인해 서버로부터 회원가입이 거부되었습니다.");
+      }
+      else if (error.request) alert("서버로부터 응답을 받지 못했습니다.");
+      else alert("알 수 없는 오류");
+    });
   }
   return (
     <>
@@ -71,7 +96,7 @@ export default function SignUp() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit(FormSubmit)} className="mt-8 grid grid-cols-6 gap-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Name"
@@ -120,7 +145,7 @@ export default function SignUp() {
                     id="Email"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
-                  
+
                   <span className="text-xs font-medium text-red-600">{errors.email?.message}</span>
                 </div>
 
