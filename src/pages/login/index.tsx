@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 interface LoginFormTypes {
   email: string;
@@ -11,9 +12,28 @@ export default function Login() {
   const router = useRouter();
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormTypes>();
-  const FormSubmit = (data: LoginFormTypes) => {
-    //API
+
+  const onSubmit = (data: LoginFormTypes) => {
+    axios.post("/v1/auth/signin", {
+      email: data.email,
+      password: data.password,
+    }).then((res) => {
+      const { token } = res.data;
+      if (token) {
+        localStorage.setItem('gatherschool-token', token);
+        router.push('/home');
+      }
+      else alert("사용자 토큰을 받지 못했습니다.")
+    }).catch((error) => {
+      if (error.response) {
+        if (error.response.status === 409) alert(error.response.data.msg);
+        else alert("알 수 없는 이유로 인해 서버로부터 로그인이 거부되었습니다.");
+      }
+      else if (error.request) alert("서버로부터 응답을 받지 못했습니다.");
+      else alert("알 수 없는 오류");
+    });
   }
+
   return (
     <>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -27,7 +47,7 @@ export default function Login() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(FormSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
                 Email

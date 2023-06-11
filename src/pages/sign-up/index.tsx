@@ -17,10 +17,10 @@ export default function SignUp() {
   const router = useRouter();
   const yearList: any[] = [""];
   for (let i = 1960; i <= 2023; i++) yearList.push(i);
-
+  
   const { register, watch, handleSubmit, formState: { errors } } = useForm<SignUpFormTypes>();
   const onSubmit = (data: SignUpFormTypes) => {
-    axios.post("http://ec2-13-124-183-78.ap-northeast-2.compute.amazonaws.com/v1/auth/signup", {
+    axios.post("/v1/auth/signup", {
       email: data.email,
       name: data.name,
       password: data.password,
