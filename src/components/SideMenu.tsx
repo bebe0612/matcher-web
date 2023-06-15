@@ -137,9 +137,9 @@ export default function SideMenu() {
 
             <div>
               <p className="text-xs">
-                <strong className="block font-medium">제임스</strong>
+                <strong className="block font-medium">이상원</strong>
 
-                <span> james@majes.com</span>
+                <span> leesangwon@kw.ac.kr</span>
               </p>
             </div>
           </a>
