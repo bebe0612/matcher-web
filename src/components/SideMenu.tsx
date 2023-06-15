@@ -9,7 +9,14 @@ export default function SideMenu() {
             <img src="/logo.png" width={150} alt={""} className="mx-auto" />
           </Link>
 
-          <nav aria-label="Main Nav" className="mt-10 flex flex-col space-y-1">
+          {/*// center*/}
+          <div className="flex pt-3">
+            <span className="text-sm font-medium text-center">
+              광운대학교에 오신 것을 환영합니다.
+            </span>
+          </div>
+
+          <nav aria-label="Main Nav" className="mt-5 flex flex-col space-y-1">
             <Link
               href="/home"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
