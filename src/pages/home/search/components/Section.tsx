@@ -7,12 +7,11 @@ export default function Section() {
             <div className="max-w-md mx-auto text-center lg:text-left">
               <header>
                 <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-                  Watches
+                  우리 학교 알아보기
                 </h2>
 
                 <p className="mt-4 text-gray-500">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
-                  rerum quam amet provident nulla error!
+                  우리 학교는 지금 어떻게 바뀌었을까요?
                 </p>
               </header>
 
@@ -20,7 +19,7 @@ export default function Section() {
                 href="#"
                 className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white transition bg-gray-900 border border-gray-900 rounded hover:shadow focus:outline-none focus:ring"
               >
-                Shop All
+                바로가기
               </a>
             </div>
           </div>
@@ -30,17 +29,19 @@ export default function Section() {
               <li>
                 <a href="#" className="block group">
                   <img
-                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
+                    src="/school-01.png"
                     alt=""
                     className="object-cover w-full rounded aspect-square"
                   />
 
                   <div className="mt-3">
                     <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
-                      Simple Watch
+                      광운대의 새로운 소식
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">$150</p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      광운대가 2023년을 들어 다시 태어납니다!
+                    </p>
                   </div>
                 </a>
               </li>
@@ -48,17 +49,19 @@ export default function Section() {
               <li>
                 <a href="#" className="block group">
                   <img
-                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
+                    src="/school-02.png"
                     alt=""
                     className="object-cover w-full rounded aspect-square"
                   />
 
                   <div className="mt-3">
                     <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
-                      Simple Watch
+                      비마관 재건축 확정!
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">$150</p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      추억이 깃든 비마관, 과거와 미래를 확인해보아요.
+                    </p>
                   </div>
                 </a>
               </li>
