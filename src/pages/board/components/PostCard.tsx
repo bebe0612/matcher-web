@@ -1,24 +1,47 @@
-export default function PostCard() {
+import Link from "next/link";
+
+export interface postType {
+  imgSrc: string;
+  writer: string;
+  title: string;
+  content: string;
+  year: number;
+}
+
+export default function PostCard({ imgSrc, title, content, writer, year }: postType) {
   return (
     <>
-      <a
-        className="h-60 block rounded-xl border border-gray-200 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
-      >
-        <img
-          alt="Man"
-          src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          className="h-10 w-10 rounded-full object-cover"
-        />
+      <Link
+        className="h-60 block rounded-xl border border-gray-200 p-8 hover:shadow-lg transition hover:border-orange-500 hover:shadow-orange-200"
+        href="/services/digital-campaigns">
+
+        <div className="flex items-center gap-2">
+          <img
+            alt="Man"
+            src={imgSrc}
+            className="h-10 w-10 rounded-full object-cover"
+          />
+          
+          <div>
+            <p className="text-lg font-bold text-gray-800">
+              {writer}
+            </p>
+            <p className="text-xs text-gray-800">
+              {year}년 입학
+            </p>
+          </div>
+
+        </div>
 
         <h2 className="mt-4 text-xl font-bold text-black">
-          게더스쿨이 뭐에요?
+          {title}
         </h2>
 
         <p className="mt-1 text-sm text-gray-800">
-          뭔지는 잘 모르겠지만 잘 부탁드립니다!
+          {content}
         </p>
-      </a>
+
+      </Link>
     </>
   );
 }
