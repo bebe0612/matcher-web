@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function SideMenu() {
   return (
     <div>
@@ -6,8 +8,8 @@ export default function SideMenu() {
           <img src="/logo.png" width={150} alt={""} className="mx-auto" />
 
           <nav aria-label="Main Nav" className="mt-10 flex flex-col space-y-1">
-            <a
-              href="#"
+            <Link
+              href="/home"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <img
@@ -16,10 +18,10 @@ export default function SideMenu() {
               />
 
               <span className="text-sm font-medium"> 동창 찾기 </span>
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/board"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <img
@@ -28,10 +30,10 @@ export default function SideMenu() {
               />
 
               <span className="text-sm font-medium"> 게시판 </span>
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/chat"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <img
@@ -40,7 +42,7 @@ export default function SideMenu() {
               />
 
               <span className="text-sm font-medium"> 채팅 </span>
-            </a>
+            </Link>
 
             <details className="group [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">

@@ -48,10 +48,10 @@ export default function NewFriendsSection() {
                   </svg>
                 </span>
 
-                <h2 className="mt-2 font-bold">포코</h2>
+                <h2 className="mt-2 font-bold">김나은</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  애들아 나 기억나?
                 </p>
               </a>
 
@@ -78,10 +78,10 @@ export default function NewFriendsSection() {
                   </svg>
                 </span>
 
-                <h2 className="mt-2 font-bold">토토로</h2>
+                <h2 className="mt-2 font-bold">이서은</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  3학년 3반 모여라 !
                 </p>
               </a>
 
@@ -108,10 +108,10 @@ export default function NewFriendsSection() {
                   </svg>
                 </span>
 
-                <h2 className="mt-2 font-bold">맥심</h2>
+                <h2 className="mt-2 font-bold">모래시계</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
                 </p>
               </a>
 
@@ -141,7 +141,7 @@ export default function NewFriendsSection() {
                 <h2 className="mt-2 font-bold">에디</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  지겨운 수업이다
                 </p>
               </a>
 
@@ -168,10 +168,10 @@ export default function NewFriendsSection() {
                   </svg>
                 </span>
 
-                <h2 className="mt-2 font-bold">크뇽이</h2>
+                <h2 className="mt-2 font-bold">김효진</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  2반 효진이
                 </p>
               </a>
 
@@ -198,10 +198,10 @@ export default function NewFriendsSection() {
                   </svg>
                 </span>
 
-                <h2 className="mt-2 font-bold">뽀롱이</h2>
+                <h2 className="mt-2 font-bold">이덕재</h2>
 
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
+                  경찰이 된 이덕재
                 </p>
               </a>
             </div>

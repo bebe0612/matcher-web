@@ -1,6 +1,6 @@
-import Header from "@/src/pages/home/components/Header";
-import PostGridSection from "@/src/pages/home/board/components/PostGridSection";
 import Link from "next/link";
+import Header from "@/src/components/Header";
+import PostGridSection from "@/src/pages/board/components/PostGridSection";
 
 export default function BoardScreen() {
   return (

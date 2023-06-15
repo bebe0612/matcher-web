@@ -1,4 +1,4 @@
-import PostCard from "@/src/pages/home/board/components/PostCard";
+import PostCard from "@/src/pages/board/components/PostCard";
 
 export default function PostGridSection() {
   return (
