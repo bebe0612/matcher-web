@@ -6,21 +6,22 @@ export default function NewFriendsSection() {
           <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
             <div className="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
               <h2 className="text-3xl font-bold sm:text-4xl">
-                방금 가입한 친구들이에요!
+                방금 가입한 친구들이에요 🎉
               </h2>
 
               <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-                vero aliquid sint distinctio iure ipsum cupiditate? Quis, odit
-                assumenda? Deleniti quasi inventore, libero reiciendis minima
-                aliquid tempora. Obcaecati, autem.
+                이름과 한줄 소개만 보고 누군지 알아볼 수 있나요?
+                <br />
+                모르시겠다구요? 먼저 친구 추가를 요청하고 말을 걸어보세요.
+                <br />
+                친구가 되어주실 거에요! 🤝
               </p>
 
               <a
                 href="#"
                 className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
-                서비스는 어떻게 이용하나요?
+                더 많은 친구둘 찾기 🤩
               </a>
             </div>
 
