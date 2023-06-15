@@ -5,7 +5,9 @@ export default function SideMenu() {
     <div>
       <div className="flex h-screen flex-col justify-between border-e bg-white w-60 sticky top-0">
         <div className="px-4 py-6">
-          <img src="/logo.png" width={150} alt={""} className="mx-auto" />
+          <Link href="/home">
+            <img src="/logo.png" width={150} alt={""} className="mx-auto" />
+          </Link>
 
           <nav aria-label="Main Nav" className="mt-10 flex flex-col space-y-1">
             <Link
