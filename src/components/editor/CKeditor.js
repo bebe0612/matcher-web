@@ -17,9 +17,9 @@ function CEditor({ onChange, name, value }) {
         name={name}
         config={{
           extraPlugins: [MyCustomUploadAdapterPlugin],
+          placeholder: value,
         }}
         editor={Editor}
-        data={value}
         onChange={(event, editor) => {
           const data = editor.getData();
           onChange(data);
