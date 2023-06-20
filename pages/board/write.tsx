@@ -1,4 +1,4 @@
-import PostUpsertPage from "@/src/pages/post-upsert";
+import PostUpsertPage from "@/src/pages/board/post-upsert";
 import PageHead from "@/src/components/pagehead";
 import loginCheck from "@/src/components/loginCheck";
 

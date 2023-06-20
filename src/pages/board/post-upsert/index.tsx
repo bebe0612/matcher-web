@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const Editor = dynamic(() => import("../../components/editor/CKeditor"), {
+const Editor = dynamic(() => import("../../../components/editor/CKeditor"), {
   ssr: false,
 });
 
