@@ -1,4 +1,4 @@
-import PostUpsertPage from "@/src/pages/board/post-upsert";
+import Write from "@/src/pages/board/write";
 import PageHead from "@/src/components/pagehead";
 import loginCheck from "@/src/components/loginCheck";
 
@@ -8,7 +8,7 @@ export default function Index() {
   return (
     <>
       <PageHead title="글쓰기" />
-      <PostUpsertPage />
+      <Write />
     </>
   );
 }
