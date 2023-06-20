@@ -1,14 +1,15 @@
 import Link from "next/link";
 
 export interface postType {
-  imgSrc: string;
-  writer: string;
+  id:number;
   title: string;
   content: string;
-  year: number;
+  nickname: number;
+  createdDt: number[];
 }
 
-export default function PostCard({ imgSrc, title, content, writer, year }: postType) {
+export default function PostCard({ id, title, content, nickname, createdDt }: postType) {
+  console.log(createdDt);
   return (
     <>
       <Link
@@ -18,16 +19,16 @@ export default function PostCard({ imgSrc, title, content, writer, year }: postT
         <div className="flex items-center gap-2">
           <img
             alt="Man"
-            src={imgSrc}
+            src="/defaultprofile.svg"
             className="h-10 w-10 rounded-full object-cover"
           />
-          
+
           <div>
             <p className="text-lg font-bold text-gray-800">
-              {writer}
+              {nickname}
             </p>
             <p className="text-xs text-gray-800">
-              {year}년 입학
+              {createdDt[0]}/{createdDt[1]}/{createdDt[2]} {createdDt[3]}:{createdDt[4]}
             </p>
           </div>
 

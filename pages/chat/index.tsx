@@ -7,7 +7,7 @@ export default function Index() {
 
   return (
     <>
-      <PageHead title="홈" />
+      <PageHead title="채팅" />
       <Chat />
     </>
   );
