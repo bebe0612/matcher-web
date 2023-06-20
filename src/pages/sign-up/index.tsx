@@ -9,6 +9,7 @@ interface SignUpFormTypes {
   password: string;
   password_confirmation: string;
   schoolName: string;
+  schoolType: string;
   enrolledYear: number;
   marketing_accept: boolean;
 }
@@ -16,15 +17,16 @@ interface SignUpFormTypes {
 export default function SignUp() {
   const router = useRouter();
   const yearList: any[] = [""];
+  const schoolTypeList = ["초등학교", "중학교", "고등학교"];
   for (let i = 1960; i <= 2023; i++) yearList.push(i);
-  
+
   const { register, watch, handleSubmit, formState: { errors } } = useForm<SignUpFormTypes>();
   const onSubmit = (data: SignUpFormTypes) => {
     axios.post("/v1/auth/signup", {
       email: data.email,
       name: data.name,
       password: data.password,
-      schoolName: data.schoolName,
+      schoolName: data.schoolName + data.schoolType,
       yearOfAdmission: data.enrolledYear,
     }, {
       headers: {
@@ -44,6 +46,7 @@ export default function SignUp() {
       else alert("알 수 없는 오류");
     });
   }
+  
   return (
     <>
       <section className="bg-white">
@@ -205,18 +208,28 @@ export default function SignUp() {
                     출신 학교
                   </label>
 
-                  <input
-                    {...register("schoolName", {
-                      required: "출신학교를 입력해 주세요.",
-                      maxLength: {
-                        value: 20,
-                        message: "학교명은 20자 이하여야 합니다.",
-                      }
-                    })}
-                    type="text"
-                    id="SchoolName"
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                  />
+                  <div>
+                    <input
+                      {...register("schoolName", {
+                        required: "출신학교를 입력해 주세요.",
+                        maxLength: {
+                          value: 10,
+                          message: "학교명은 10자 이하여야 합니다.",
+                        }
+                      })}
+                      type="text"
+                      id="SchoolName"
+                      className="mt-1 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    />
+                    <select
+                      {...register("schoolType")}
+                      id="schoolType"
+                      className="mt-1 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                      {schoolTypeList.map((school) => (
+                        <option key={school}>{school}</option>
+                      ))}
+                    </select>
+                  </div>
 
                   <span className="text-xs font-medium text-red-600">{errors.schoolName?.message}</span>
                 </div>
