@@ -1,14 +1,14 @@
 import SideMenu from "@/src/components/SideMenu";
-import PostGridSection from "@/src/pages/board/components/PostGridSection";
+import PostView from "@/src/pages/board/components/PostView";
 import BoardHead from "@/src/pages/board/components/BoardHead";
 
-export default function Board() {
+export default function BoardView({ id }: any) {
   return (
     <div className="flex">
       <SideMenu />
       <div className="flex flex-col flex-grow">
         <BoardHead />
-        <PostGridSection />
+        <PostView id={id} />
       </div>
     </div>
   );

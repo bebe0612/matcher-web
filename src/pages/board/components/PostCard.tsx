@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export interface postType {
-  id:number;
+  id: number;
   title: string;
   content: string;
   nickname: number;
@@ -13,7 +13,7 @@ export default function PostCard({ id, title, content, nickname, createdDt }: po
     <>
       <Link
         className="h-60 block rounded-xl border border-gray-200 p-8 hover:shadow-lg transition hover:border-orange-500 hover:shadow-orange-200"
-        href="/services/digital-campaigns">
+        href={`/board/${id}`}>
 
         <div className="flex items-center gap-2">
           <img
@@ -38,7 +38,7 @@ export default function PostCard({ id, title, content, nickname, createdDt }: po
         </h2>
 
         <p className="mt-1 text-sm text-gray-800">
-          {content}
+          {content.replace(/<[^>]*>?/g, ' ')}
         </p>
 
       </Link>

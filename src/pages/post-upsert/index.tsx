@@ -1,4 +1,6 @@
+import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Editor = dynamic(() => import("../../components/editor/CKeditor"), {
@@ -6,11 +8,24 @@ const Editor = dynamic(() => import("../../components/editor/CKeditor"), {
 });
 
 export default function PostUpsertPage() {
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const postSumbit = () => {
-    //API
-    console.log({ title, content });
+  const router = useRouter();
+  const [title_, setTitle] = useState<string>('');
+  const [content_, setContent] = useState<string>('');
+  const onSumbit = () => {
+    console.log({ title_, content_ });
+    axios.post("/v1/board", {
+      content: content_,
+      title: title_,
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then((res) => {
+      alert("글이 작성되었습니다.");
+      router.push("/board");
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   return (
@@ -34,7 +49,7 @@ export default function PostUpsertPage() {
         </div>
 
         <button
-          onClick={postSumbit}
+          onClick={onSumbit}
           className="border"
         >
           제출
