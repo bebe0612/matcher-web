@@ -9,7 +9,6 @@ export interface postType {
 }
 
 export default function PostCard({ id, title, content, nickname, createdDt }: postType) {
-  console.log(createdDt);
   return (
     <>
       <Link
