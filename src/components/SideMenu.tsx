@@ -30,18 +30,6 @@ export default function SideMenu() {
             </Link>
 
             <Link
-              href="/board"
-              className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-            >
-              <img
-                src="https://img.icons8.com/fluency-systems-regular/48/null/google-classroom.png"
-                width={18}
-              />
-
-              <span className="text-sm font-medium"> 게시판 </span>
-            </Link>
-
-            <Link
               href="/chat"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
