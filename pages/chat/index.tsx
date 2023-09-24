@@ -1,6 +1,6 @@
 import PageHead from "@/src/components/pagehead";
 import Chat from "@/src/pages/chat";
-import loginCheck from "@/src/components/loginCheck";
+import loginCheck from "@/util/loginCheck";
 
 export default function Index() {
   loginCheck();
