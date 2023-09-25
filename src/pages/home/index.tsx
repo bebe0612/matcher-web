@@ -1,4 +1,4 @@
-import SearchScreen from "@/src/pages/home/search/SearchScreen";
+import SearchScreen from "@/src/pages/home/components/SearchScreen";
 import SideMenu from "@/src/components/SideMenu";
 
 export default function Home() {

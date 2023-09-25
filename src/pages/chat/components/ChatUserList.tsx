@@ -1,4 +1,18 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function ChatUserList() {
+  const [friendList, setFriendList] = useState(["이윤지", "장승호", "홍승기"]);
+  useEffect(() => {
+    axios.get('') // 현재 자신의 친구의 정보 목록 조회 API
+      .then((res) => {
+        //setFriendList([]);
+      })
+      .catch((error) => {
+
+      });
+  }, []);
+
   return (
     <div className="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
       <div className="flex flex-row items-center justify-center h-12 w-full">
@@ -20,6 +34,7 @@ export default function ChatUserList() {
         </div>
         <div className="ml-2 font-bold text-2xl">실시간 채팅</div>
       </div>
+
       <div className="flex flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
         <div className="h-20 w-20 rounded-full border overflow-hidden">
           <img
@@ -37,35 +52,30 @@ export default function ChatUserList() {
           <div className="leading-none ml-1 text-xs">활성</div>
         </div>
       </div>
+
       <div className="flex flex-col mt-8">
         <div className="flex flex-row items-center justify-between text-xs">
           <span className="font-bold">활동중인 친구들</span>
           <span className="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">
-            4
+            {friendList.length}
           </span>
         </div>
+
         <div className="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto">
-          <button className="flex flex-row items-center bg-gray-100 rounded-xl p-2">
-            <div className="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
-              이
-            </div>
-            <div className="ml-2 text-sm font-semibold">이윤지</div>
-          </button>
-          <button className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-            <div className="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full">
-              장
-            </div>
-            <div className="ml-2 text-sm font-semibold">장승호</div>
-            <div className="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none">
-              2
-            </div>
-          </button>
-          <button className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-            <div className="flex items-center justify-center h-8 w-8 bg-orange-200 rounded-full">
-              홍
-            </div>
-            <div className="ml-2 text-sm font-semibold">홍승기</div>
-          </button>
+          {friendList.map((friend: any) =>
+            <button className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
+              <div className="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full">
+                {friend[0]}
+              </div>
+              <div className="ml-2 text-sm font-semibold">{friend}</div>
+
+              {/* <div className="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none">
+                2
+              </div>
+              # 확인하지 않은 메시지 수
+              */}
+            </button>
+          )}
         </div>
       </div>
     </div>

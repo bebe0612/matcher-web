@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NewFriendsSection() {
   return (
     <>
@@ -17,16 +19,16 @@ export default function NewFriendsSection() {
                 친구가 되어주실 거에요! 🤝
               </p>
 
-              <a
-                href="#"
+              <Link
+                href="/search"
                 className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
                 더 많은 친구둘 찾기 🤩
-              </a>
+              </Link>
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <a
+              <Link
                 className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
                 href="/accountant"
               >
@@ -54,7 +56,7 @@ export default function NewFriendsSection() {
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                   애들아 나 기억나?
                 </p>
-              </a>
+              </Link>
 
               <a
                 className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"

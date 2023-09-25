@@ -1,6 +1,6 @@
-import NewFriendsSection from "@/src/pages/home/search/components/NewFriendsSection";
+import NewFriendsSection from "@/src/pages/home/components/NewFriendsSection";
 import Header from "@/src/components/Header";
-import Section from "@/src/pages/home/search/components/Section";
+import Section from "@/src/pages/home/components/Section";
 
 export default function SearchScreen() {
   return (
