@@ -1,6 +1,6 @@
 import axios from "axios";
 export default function Search() {
-  axios.get('/v1/home')
+  axios.get('/v1/alumni') // 테스트
     .then((res) => {
       console.log(res);
     })

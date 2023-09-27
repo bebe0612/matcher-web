@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { MessageDto } from "@/src/types/message-dto";
 
 interface ChatRoomStore {
-  messages: [MessageDto];
+  messages: MessageDto[];
   addMessage: (message: MessageDto) => void;
 }
 
@@ -39,8 +39,7 @@ const ChatRoomStore = create<ChatRoomStore>((set) => ({
       body: "잘부탁드립니다 :)",
     },
   ],
-  addMessage: (message: MessageDto) =>
-    set((state) => ({ messages: [...state.messages, message] })),
+  addMessage: (message: MessageDto) => set((state) => ({ messages: [...state.messages, message] })),
 }));
 
 export default ChatRoomStore;
