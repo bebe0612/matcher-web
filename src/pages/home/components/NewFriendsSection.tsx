@@ -1,6 +1,34 @@
+import { UserDto } from "@/src/types/user-dto";
+import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function NewFriendsSection() {
+  const [alumniList, setAlumniList] = useState<UserDto[]>([]);
+
+  useEffect(() => {
+    axios.get('/v1/alumni')
+      .then((res) => {
+        setAlumniList(res.data);
+      })
+      .catch((error) => {
+
+      });
+  }, []);
+
+  const addFriend = (name: string, id: number) => {
+    if (confirm(name + '님을 친구로 추가하시겠습니까?')) {
+      axios.post('/v1/alumni/' + id)
+        .then((res) => {
+          console.log(res);
+          alert(name + '님을 친구로 추가했습니다!');
+        })
+        .catch((error) => {
+          alert('오류');
+        });
+    }
+  };
+
   return (
     <>
       <section>
@@ -8,7 +36,7 @@ export default function NewFriendsSection() {
           <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
             <div className="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
               <h2 className="text-3xl font-bold sm:text-4xl">
-                방금 가입한 친구들이에요 🎉
+                방금 가입한 동창들이에요 🎉
               </h2>
 
               <p className="mt-4 text-gray-600">
@@ -21,192 +49,22 @@ export default function NewFriendsSection() {
 
               <Link
                 href="/search"
-                className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+                className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 active:outline-none active:ring active:ring-yellow-400"
               >
-                더 많은 친구둘 찾기 🤩
+                더 많은 친구들 찾기 🤩
               </Link>
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <Link
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
+              {alumniList.map((alumni: UserDto) =>
+                <button onClick={() => { addFriend(alumni.nickname, alumni.id) }} className="flex flex-col items-center rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 active:outline-none active:ring" key={alumni.id}>
+                  <span className="inline-block rounded-lg bg-gray-50 p-3">
+                    <img className="h-6 w-6" src='/alumni.svg' />
+                  </span>
 
-                <h2 className="mt-2 font-bold">김나은</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  애들아 나 기억나?
-                </p>
-              </Link>
-
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold">이서은</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  3학년 3반 모여라 !
-                </p>
-              </a>
-
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold">모래시계</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-                </p>
-              </a>
-
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold">에디</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  지겨운 수업이다
-                </p>
-              </a>
-
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold">김효진</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  2반 효진이
-                </p>
-              </a>
-
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="/accountant"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold">이덕재</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  경찰이 된 이덕재
-                </p>
-              </a>
+                  <h2 className="mt-2 font-bold">{alumni.nickname}</h2>
+                </button>
+              )}
             </div>
           </div>
         </div>

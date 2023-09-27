@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Section() {
   return (
     <section>
@@ -15,24 +17,17 @@ export default function Section() {
                 </p>
               </header>
 
-              <a
-                href="#"
-                className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white transition bg-gray-900 border border-gray-900 rounded hover:shadow focus:outline-none focus:ring"
-              >
+              <Link target='_blank' href="https://www.kw.ac.kr/ko/" className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white transition bg-gray-900 border border-gray-900 rounded hover:shadow focus:outline-none focus:ring">
                 바로가기
-              </a>
+              </Link>
             </div>
           </div>
 
           <div className="lg:col-span-2 lg:py-8">
             <ul className="grid grid-cols-2 gap-4">
               <li>
-                <a href="#" className="block group">
-                  <img
-                    src="/school-01.png"
-                    alt=""
-                    className="object-cover w-full rounded aspect-square"
-                  />
+                <Link target='_blank' href="https://www.kw.ac.kr/ko/" className="block group">
+                  <img src="/school-01.png" className="object-cover w-full rounded aspect-square"/>
 
                   <div className="mt-3">
                     <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
@@ -43,16 +38,12 @@ export default function Section() {
                       광운대가 2023년을 들어 다시 태어납니다!
                     </p>
                   </div>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="#" className="block group">
-                  <img
-                    src="/school-02.png"
-                    alt=""
-                    className="object-cover w-full rounded aspect-square"
-                  />
+                <Link target='_blank' href="https://www.kw.ac.kr/ko/" className="block group">
+                  <img src="/school-02.png" className="object-cover w-full rounded aspect-square"/>
 
                   <div className="mt-3">
                     <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
@@ -63,7 +54,7 @@ export default function Section() {
                       추억이 깃든 비마관, 과거와 미래를 확인해보아요.
                     </p>
                   </div>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
