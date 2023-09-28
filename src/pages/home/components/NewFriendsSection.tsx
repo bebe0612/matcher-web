@@ -1,3 +1,4 @@
+import useMyProfile from "@/src/components/MyProfileStore";
 import { UserDto } from "@/src/types/user-dto";
 import axios from "axios";
 import Link from "next/link";
@@ -5,27 +6,27 @@ import { useEffect, useState } from "react";
 
 export default function NewFriendsSection() {
   const [alumniList, setAlumniList] = useState<UserDto[]>([]);
+  const { myProfile } = useMyProfile();
 
   useEffect(() => {
     axios.get('/v1/alumni')
       .then((res) => {
         setAlumniList(res.data);
       })
-      .catch((error) => {
-
-      });
-  }, []);
+      .catch((error) => { alert('오류') });
+  },[]);
 
   const addFriend = (name: string, id: number) => {
-    if (confirm(name + '님을 친구로 추가하시겠습니까?')) {
+    if (id === myProfile.id) {
+      alert('자기 자신을 친구로 추가할 수 없습니다.');
+    }
+    else if (confirm(name + ' 님을 친구로 추가하시겠습니까?')) {
       axios.post('/v1/alumni/' + id)
         .then((res) => {
           console.log(res);
-          alert(name + '님을 친구로 추가했습니다!');
+          alert(name + ' 님을 친구로 추가했습니다!');
         })
-        .catch((error) => {
-          alert('오류');
-        });
+        .catch((error) => { alert('오류') });
     }
   };
 

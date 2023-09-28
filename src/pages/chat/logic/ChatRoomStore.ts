@@ -12,6 +12,9 @@ const ChatRoomStore = create<ChatRoomStore>((set) => ({
       id: 1,
       me: false,
       user: {
+        createdDt:[],
+        schoolName: '',
+        yearOfAdmission: 0,
         id: 1,
         email: "ㅁㄴㅇ",
         nickname: "이윤지",
@@ -22,6 +25,9 @@ const ChatRoomStore = create<ChatRoomStore>((set) => ({
       id: 2,
       me: true,
       user: {
+        createdDt:[],
+        schoolName: '',
+        yearOfAdmission: 0,
         id: 1,
         email: "ㅁㄴㅇ",
         nickname: "이윤지",
@@ -32,6 +38,9 @@ const ChatRoomStore = create<ChatRoomStore>((set) => ({
       id: 3,
       me: false,
       user: {
+        createdDt:[],
+        schoolName: '',
+        yearOfAdmission: 0,
         id: 1,
         email: "ㅁㄴㅇ",
         nickname: "이윤지",

@@ -1,18 +1,23 @@
 import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import useMyProfile from "./MyProfileStore";
 
 export default function SideMenu() {
-  const [myProfile, setMyProfile] = useState<any>({});
-  useEffect(() => {
+  const router  = useRouter();
+  const { myProfile, setMyProfile } = useMyProfile();
+  if (myProfile.id == -1) {
     axios.get('/v1/users/me')
       .then((res) => {
         setMyProfile(res.data);
       })
       .catch((error) => {
-
+        if(error.response.status === 401){
+          alert('권한 없음');
+          router.push('/');
+        }
       });
-  }, []);
+  }
 
   return (
     <div>

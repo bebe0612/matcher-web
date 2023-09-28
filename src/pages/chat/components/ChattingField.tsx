@@ -16,14 +16,12 @@ export default function ChattingField() {
             type="text"
             className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
             value={message}
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
+            onChange={(event) => { setMessage(event.target.value); }}
           />
 
           <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
             <svg className="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </button>
         </div>
@@ -38,6 +36,9 @@ export default function ChattingField() {
               body: message,
               me: true,
               user: {
+                createdDt: [],
+                schoolName: '',
+                yearOfAdmission: 0,
                 id: 1,
                 nickname: "이상원",
                 email: "asd",
@@ -50,7 +51,7 @@ export default function ChattingField() {
           <span>전송</span>
           <span className="ml-2">
             <svg className="w-4 h-4 transform rotate-45 -mt-px fill-none stroke-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
           </span>
         </button>
