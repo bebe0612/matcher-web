@@ -4,17 +4,19 @@ import { useRouter } from "next/router";
 import useMyProfile from "./MyProfileStore";
 
 export default function SideMenu() {
-  const router  = useRouter();
+  const router = useRouter();
   const { myProfile, setMyProfile } = useMyProfile();
-  if (myProfile.id == -1) {
+  if (myProfile.id === -1) {
     axios.get('/v1/users/me')
       .then((res) => {
         setMyProfile(res.data);
       })
       .catch((error) => {
-        if(error.response.status === 401){
-          alert('권한 없음');
-          router.push('/');
+        if (error.response) {
+          if (error.response.status === 401) {
+            alert('권한 없음');
+            router.push('/');
+          }
         }
       });
   }
