@@ -1,11 +1,11 @@
-import { UserDto } from "@/src/types/user-dto";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import { FriendDto } from "@/src/types/friend-dto";
 
 export default function ChatUserList() {
-  const [friendList, setFriendList] = useState<UserDto[]>([]);
-  const { currentFriendId, setCurrentFriend } = useCurrentFriend();
+  const [friendList, setFriendList] = useState<FriendDto[]>([]);
+  const { setCurrentFriend } = useCurrentFriend();
 
   useEffect(() => {
     axios
@@ -18,8 +18,8 @@ export default function ChatUserList() {
       });
   }, []);
 
-  const onClick = (friendId: number) => {
-    setCurrentFriend(friendId);
+  const onClick = (friend: FriendDto) => {
+    setCurrentFriend(friend);
     // 채팅할 친구를 선택할 시 행동 : api로 이전 메시지 불러온 후 웹소켓 연결
   };
 
@@ -52,11 +52,11 @@ export default function ChatUserList() {
         </div>
 
         <div className="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto">
-          {friendList.map((friend: UserDto) => (
+          {friendList.map((friend: FriendDto) => (
             <button
               className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
               key={friend.id}
-              onClick={() => onClick(friend.id)}
+              onClick={() => onClick(friend)}
             >
               <div className="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full">
                 {friend.nickname[0]}

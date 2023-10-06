@@ -1,12 +1,26 @@
-import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
 import { useState } from "react";
+import useMyProfile from "@/src/components/MyProfileStore";
+import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
 
-export default function ChattingField() {
-  const { messages, addMessage }: ChatRoomStore = ChatRoomStore();
-
-  // message state using usestate
-
+export default function ChattingField({ client }: any) {
   const [message, setMessage] = useState("");
+  const { myProfile } = useMyProfile();
+  const { currentFriend } = useCurrentFriend();
+
+  const onClick = () => {
+    if(message !== ''){
+      client.publish({
+        destination: "/pub/chat/message",
+        body: JSON.stringify({
+          roomId: currentFriend.roomId,
+          userId: myProfile.id,
+          text: message,
+        }),
+      });
+  
+      setMessage("");
+    }
+  };
 
   return (
     <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
@@ -16,9 +30,7 @@ export default function ChattingField() {
             type="text"
             className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
             value={message}
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
+            onChange={(e) => setMessage(e.target.value)}
           />
 
           <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
@@ -41,23 +53,7 @@ export default function ChattingField() {
       <div className="ml-4">
         <button
           className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
-          onClick={() => {
-            addMessage({
-              id: messages.length + 1,
-              body: message,
-              me: true,
-              user: {
-                createdDt: [],
-                schoolName: "",
-                yearOfAdmission: 0,
-                id: 1,
-                nickname: "이상원",
-                email: "asd",
-              },
-            });
-
-            setMessage("");
-          }}
+          onClick={() => onClick()}
         >
           <span>전송</span>
           <span className="ml-2">

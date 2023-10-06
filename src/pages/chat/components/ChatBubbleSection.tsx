@@ -2,61 +2,51 @@ import ChatBubble from "@/src/pages/chat/components/ChatBubble";
 import ChattingField from "@/src/pages/chat/components/ChattingField";
 import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
 import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useMyProfile from "@/src/components/MyProfileStore";
 import { useEffect } from "react";
-import StompJs, { Client } from "@stomp/stompjs";
+import { Client } from "@stomp/stompjs";
+import axios from "axios";
 
 export default function ChatBubbleSection() {
-  const { messages, addMessage }: ChatRoomStore = ChatRoomStore();
-  const { currentFriendId } = useCurrentFriend();
+  const { currentFriend } = useCurrentFriend();
+  const { messages, addMessage, setMessage }: ChatRoomStore = ChatRoomStore();
+  const { myProfile } = useMyProfile();
+  let client = new Client({
+    brokerURL: "ws://ec2-13-125-198-121.ap-northeast-2.compute.amazonaws.com/stomp/chat",
+    //debug: (str) => console.log(str),
+    reconnectDelay: 5000,
+    heartbeatIncoming: 4000,
+    heartbeatOutgoing: 4000,
+  });
+  client.activate();
 
   useEffect(() => {
-    console.log("useEffect");
-
-    const client = new Client({
-      brokerURL:
-        "ws://ec2-13-125-198-121.ap-northeast-2.compute.amazonaws.com/stomp/chat",
-      debug: function (str) {
-        console.log(str);
-      },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-    });
-    client.onConnect = function (frame) {
-      console.log("Connected: " + frame);
-
-      client.subscribe("/sub/chat/room/1", function (message) {
-        console.log(message);
-      });
-
-      client.publish({
-        destination: "/pub/chat/message",
-        body:
-          "{\n" +
-          '    "id":1,\n' +
-          '    "roomId":1,\n' +
-          '    "userId":1,\n' +
-          '    "text":"text"\n' +
-          "}",
-
-        headers: { priority: "9" },
+    axios.get('/v1/chats?roomId=' + currentFriend.roomId)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    setMessage([]);
+    client.onConnect = () => {
+      client.subscribe("/sub/chat/room/" + currentFriend.roomId, (data: any) => {
+        const msg = JSON.parse(new TextDecoder().decode(data._binaryBody));
+        addMessage({
+          id: Math.floor(Math.random() * 10000),
+          me: msg.userId === myProfile.id,
+          user: (msg.userId === myProfile.id ? myProfile.nickname : currentFriend.nickname),
+          body: msg.text,
+        });
       });
     };
-
-    client.onStompError = function (frame) {
-      console.log("Broker reported error: " + frame.headers["message"]);
-      console.log("Additional details: " + frame.body);
-    };
-
-    client.activate();
-  });
+  }, [currentFriend.roomId]);
 
   return (
     <div className="flex flex-col flex-auto h-full p-6">
       <div
-        className={`flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4 ${
-          currentFriendId === -1 ? "hidden" : ""
-        }`}
+        className={`flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4 ${currentFriend.id === -1 ? "hidden" : ""
+          }`}
       >
         <div className="flex flex-col h-full overflow-x-auto mb-4">
           <div className="grid grid-cols-12 gap-y-2">
@@ -65,13 +55,11 @@ export default function ChatBubbleSection() {
             ))}
           </div>
         </div>
-        <ChattingField />
+        <ChattingField client={client} />
       </div>
 
       <div
-        className={`flex items-center justify-center h-full ${
-          currentFriendId === -1 ? "" : "hidden"
-        }`}
+        className={`flex items-center justify-center h-full ${currentFriend.id === -1 ? "" : "hidden"}`}
       >
         <div className="flex flex-col items-center text-gray-300">
           <div className="p-3">

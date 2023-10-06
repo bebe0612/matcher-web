@@ -1,13 +1,19 @@
+import { FriendDto } from "@/src/types/friend-dto";
 import { create } from "zustand"
 
 interface ICurrentFriend {
-  currentFriendId: number;
-  setCurrentFriend: (id: number) => void;
+  currentFriend: FriendDto;
+  setCurrentFriend: (friend: FriendDto) => void;
 }
 
 const useCurrentFriend = create<ICurrentFriend>(set => ({
-  currentFriendId: -1,
-  setCurrentFriend: (newId: number) => set({ currentFriendId: newId }),
+  currentFriend: {
+    id: -1,
+    email: '',
+    nickname: '',
+    roomId: -1,
+  },
+  setCurrentFriend: (newFriend: FriendDto) => set({ currentFriend: newFriend }),
 }));
 
 export default useCurrentFriend;
