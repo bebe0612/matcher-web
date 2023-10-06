@@ -1,11 +1,11 @@
 import useMyProfile from "@/src/components/MyProfileStore";
-import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Index() {
   const { removeProfile } = useMyProfile();
-  const { setCurrentFriend } = useCurrentFriend();
+  const { removeCurrentFriend } = useCurrentFriend();
   const router = useRouter();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Index() {
       localStorage.removeItem("gatherschool-token");
     }
     removeProfile();
-    setCurrentFriend(-1);
+    removeCurrentFriend();
     router.push('/');
   }, [])
 

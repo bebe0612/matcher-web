@@ -1,7 +1,7 @@
 import ChatBubble from "@/src/pages/chat/components/ChatBubble";
 import ChattingField from "@/src/pages/chat/components/ChattingField";
 import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
-import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
 import useMyProfile from "@/src/components/MyProfileStore";
 import { useEffect } from "react";
 import { Client } from "@stomp/stompjs";
@@ -11,7 +11,7 @@ export default function ChatBubbleSection() {
   const { currentFriend } = useCurrentFriend();
   const { messages, addMessage, setMessage }: ChatRoomStore = ChatRoomStore();
   const { myProfile } = useMyProfile();
-  let client = new Client({
+  const client = new Client({
     brokerURL: "ws://ec2-13-125-198-121.ap-northeast-2.compute.amazonaws.com/stomp/chat",
     //debug: (str) => console.log(str),
     reconnectDelay: 5000,
@@ -21,23 +21,27 @@ export default function ChatBubbleSection() {
   client.activate();
 
   useEffect(() => {
-    axios.get('/v1/chats?roomId=' + currentFriend.roomId)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
     setMessage([]);
+
+    // axios.get('/v1/chats?roomId=' + currentFriend.roomId)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+
     client.onConnect = () => {
       client.subscribe("/sub/chat/room/" + currentFriend.roomId, (data: any) => {
         const msg = JSON.parse(new TextDecoder().decode(data._binaryBody));
-        addMessage({
-          id: Math.floor(Math.random() * 10000),
-          me: msg.userId === myProfile.id,
-          user: (msg.userId === myProfile.id ? myProfile.nickname : currentFriend.nickname),
-          body: msg.text,
-        });
+        if (msg.userId !== myProfile.id) {
+          addMessage({
+            id: Math.floor(Math.random() * 10000),
+            me: false,
+            user: currentFriend.nickname,
+            body: msg.text,
+          });
+        }
       });
     };
   }, [currentFriend.roomId]);
@@ -55,6 +59,7 @@ export default function ChatBubbleSection() {
             ))}
           </div>
         </div>
+        
         <ChattingField client={client} />
       </div>
 

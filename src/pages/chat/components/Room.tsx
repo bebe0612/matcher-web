@@ -1,5 +1,5 @@
 import ChatUserList from "@/src/pages/chat/components/ChatUserList";
-import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
 import ChatBubbleSection from "@/src/pages/chat/components/ChatBubbleSection";
 
 export default function Room() {

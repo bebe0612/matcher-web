@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
 import { FriendDto } from "@/src/types/friend-dto";
 
 export default function ChatUserList() {
-  const [friendList, setFriendList] = useState<FriendDto[]>([]);
+  const [friendList, setFriendList] = useState([]);
   const { setCurrentFriend } = useCurrentFriend();
 
   useEffect(() => {

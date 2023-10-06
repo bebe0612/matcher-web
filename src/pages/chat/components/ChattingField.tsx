@@ -1,14 +1,17 @@
 import { useState } from "react";
 import useMyProfile from "@/src/components/MyProfileStore";
-import useCurrentFriend from "@/src/pages/chat/logic/currentFriendStore";
+import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
+import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
+import { Client } from "@stomp/stompjs";
 
-export default function ChattingField({ client }: any) {
+export default function ChattingField({ client }: { client: Client }) {
   const [message, setMessage] = useState("");
   const { myProfile } = useMyProfile();
   const { currentFriend } = useCurrentFriend();
+  const { addMessage }: ChatRoomStore = ChatRoomStore();
 
   const onClick = () => {
-    if(message !== ''){
+    if (message !== '' && currentFriend.roomId !== -1) {
       client.publish({
         destination: "/pub/chat/message",
         body: JSON.stringify({
@@ -17,7 +20,12 @@ export default function ChattingField({ client }: any) {
           text: message,
         }),
       });
-  
+      addMessage({
+        id: Math.floor(Math.random() * 10000),
+        me: true,
+        user: myProfile.nickname,
+        body: message,
+      });
       setMessage("");
     }
   };
