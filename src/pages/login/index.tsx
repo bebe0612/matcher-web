@@ -11,28 +11,34 @@ interface LoginFormTypes {
 export default function Login() {
   const router = useRouter();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormTypes>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormTypes>();
 
   const onSubmit = (data: LoginFormTypes) => {
-    axios.post("/v1/auth/signin", {
-      email: data.email,
-      password: data.password,
-    }).then((res) => {
-      const { token } = res.data;
-      if (token) {
-        localStorage.setItem('gatherschool-token', token);
-        router.push('/home');
-      }
-      else alert("사용자 토큰을 받지 못했습니다.")
-    }).catch((error) => {
-      if (error.response) {
-        if (error.response.status === 409) alert(error.response.data.msg);
-        else alert("알 수 없는 이유로 인해 서버로부터 로그인이 거부되었습니다.");
-      }
-      else if (error.request) alert("서버로부터 응답을 받지 못했습니다.");
-      else alert("알 수 없는 오류");
-    });
-  }
+    axios
+      .post("/v1/auth/signin", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((res) => {
+        const { token } = res.data;
+        if (token) {
+          localStorage.setItem("gatherschool-token", token);
+          router.push("/home");
+        } else alert("사용자 토큰을 받지 못했습니다.");
+      })
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 409) alert(error.response.data.msg);
+          else
+            alert("알 수 없는 이유로 인해 서버로부터 로그인이 거부되었습니다.");
+        } else if (error.request) alert("서버로부터 응답을 받지 못했습니다.");
+        else alert("알 수 없는 오류");
+      });
+  };
 
   return (
     <>
@@ -47,7 +53,10 @@ export default function Login() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          >
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -60,7 +69,7 @@ export default function Login() {
                     maxLength: {
                       value: 30,
                       message: "이메일은 30자 이하여야 합니다.",
-                    }
+                    },
                   })}
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
@@ -76,16 +85,18 @@ export default function Login() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
                     />
                   </svg>
                 </span>
               </div>
 
-              <span className="text-xs p-4 font-medium text-red-600">{errors.email?.message}</span>
+              <span className="text-xs p-4 font-medium text-red-600">
+                {errors.email?.message}
+              </span>
             </div>
 
             <div>
@@ -112,22 +123,24 @@ export default function Login() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                     />
                   </svg>
                 </span>
               </div>
 
-              <span className="text-xs p-4 font-medium text-red-600">{errors.password?.message}</span>
+              <span className="text-xs p-4 font-medium text-red-600">
+                {errors.password?.message}
+              </span>
             </div>
 
             <div className="flex items-center justify-between">
