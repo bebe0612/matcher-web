@@ -21,7 +21,7 @@ export default function ChatBubbleSection() {
     heartbeatOutgoing: 4000,
   });
   client.activate();
-  
+
   useEffect(() => {
     scrollEnd.current.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -42,6 +42,7 @@ export default function ChatBubbleSection() {
         const msg = JSON.parse(new TextDecoder().decode(data._binaryBody));
         if (msg.userId !== myProfile.id) {
           addMessage({
+            date: new Date(msg.createdDt),
             id: Math.floor(Math.random() * 10000),
             me: false,
             user: currentFriend.nickname,

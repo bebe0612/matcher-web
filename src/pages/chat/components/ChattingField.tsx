@@ -21,6 +21,7 @@ export default function ChattingField({ client }: { client: Client }) {
         }),
       });
       addMessage({
+        date: new Date(),
         id: Math.floor(Math.random() * 10000),
         me: true,
         user: myProfile.nickname,
