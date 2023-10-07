@@ -3,7 +3,7 @@ import ChattingField from "@/src/pages/chat/components/ChattingField";
 import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
 import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
 import useMyProfile from "@/src/components/MyProfileStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import axios from "axios";
 
@@ -11,6 +11,8 @@ export default function ChatBubbleSection() {
   const { currentFriend } = useCurrentFriend();
   const { messages, addMessage, setMessage }: ChatRoomStore = ChatRoomStore();
   const { myProfile } = useMyProfile();
+  const scrollEnd = useRef<any>();
+
   const client = new Client({
     brokerURL: "ws://ec2-13-125-198-121.ap-northeast-2.compute.amazonaws.com/stomp/chat",
     //debug: (str) => console.log(str),
@@ -19,6 +21,10 @@ export default function ChatBubbleSection() {
     heartbeatOutgoing: 4000,
   });
   client.activate();
+  
+  useEffect(() => {
+    scrollEnd.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   useEffect(() => {
     setMessage([]);
@@ -57,9 +63,11 @@ export default function ChatBubbleSection() {
             {messages.map((e) => (
               <ChatBubble message={e} key={e.id} />
             ))}
+
+            <div ref={scrollEnd}></div>
           </div>
         </div>
-        
+
         <ChattingField client={client} />
       </div>
 

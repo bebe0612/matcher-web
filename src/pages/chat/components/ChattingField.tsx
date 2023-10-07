@@ -5,28 +5,28 @@ import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
 import { Client } from "@stomp/stompjs";
 
 export default function ChattingField({ client }: { client: Client }) {
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState("");
   const { myProfile } = useMyProfile();
   const { currentFriend } = useCurrentFriend();
   const { addMessage }: ChatRoomStore = ChatRoomStore();
 
   const onClick = () => {
-    if (message !== '' && currentFriend.roomId !== -1) {
+    if (form !== '' && currentFriend.roomId !== -1) {
       client.publish({
         destination: "/pub/chat/message",
         body: JSON.stringify({
           roomId: currentFriend.roomId,
           userId: myProfile.id,
-          text: message,
+          text: form,
         }),
       });
       addMessage({
         id: Math.floor(Math.random() * 10000),
         me: true,
         user: myProfile.nickname,
-        body: message,
+        body: form,
       });
-      setMessage("");
+      setForm("");
     }
   };
 
@@ -37,8 +37,9 @@ export default function ChattingField({ client }: { client: Client }) {
           <input
             type="text"
             className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={form}
+            onChange={(e) => setForm(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') onClick(); }}
           />
 
           <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
