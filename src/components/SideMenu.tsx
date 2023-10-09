@@ -50,7 +50,7 @@ export default function SideMenu() {
               <span className="text-sm font-medium"> 동창 찾기 </span>
             </Link>
 
-            <Link
+            <a  // 상대방 메시지가 여러번 보이는 것을 막기 위해 새로고침 강제하는 a 태그 사용
               href="/chat"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
@@ -60,7 +60,7 @@ export default function SideMenu() {
               />
 
               <span className="text-sm font-medium"> 채팅 </span>
-            </Link>
+            </a>
 
             <Link
               href="/logout"

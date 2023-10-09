@@ -20,7 +20,6 @@ export default function ChatUserList() {
 
   const onClick = (friend: FriendDto) => {
     setCurrentFriend(friend);
-    // 채팅할 친구를 선택할 시 행동 : api로 이전 메시지 불러온 후 웹소켓 연결
   };
 
   return (

@@ -1,14 +1,12 @@
 import { useState } from "react";
 import useMyProfile from "@/src/components/MyProfileStore";
 import useCurrentFriend from "@/src/pages/chat/logic/CurrentFriendStore";
-import ChatRoomStore from "@/src/pages/chat/logic/ChatRoomStore";
 import { Client } from "@stomp/stompjs";
 
 export default function ChattingField({ client }: { client: Client }) {
   const [form, setForm] = useState("");
   const { myProfile } = useMyProfile();
   const { currentFriend } = useCurrentFriend();
-  const { addMessage }: ChatRoomStore = ChatRoomStore();
 
   const onClick = () => {
     if (form !== '' && currentFriend.roomId !== -1) {
@@ -19,13 +17,6 @@ export default function ChattingField({ client }: { client: Client }) {
           userId: myProfile.id,
           text: form,
         }),
-      });
-      addMessage({
-        date: new Date(),
-        id: Math.floor(Math.random() * 10000),
-        me: true,
-        user: myProfile.nickname,
-        body: form,
       });
       setForm("");
     }

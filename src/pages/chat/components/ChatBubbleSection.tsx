@@ -12,6 +12,7 @@ export default function ChatBubbleSection() {
   const { messages, addMessage, setMessage }: ChatRoomStore = ChatRoomStore();
   const { myProfile } = useMyProfile();
   const scrollEnd = useRef<any>();
+  const lastMsg = useRef<number>(0);
 
   const client = new Client({
     brokerURL: "ws://ec2-13-125-198-121.ap-northeast-2.compute.amazonaws.com/stomp/chat",
@@ -40,12 +41,14 @@ export default function ChatBubbleSection() {
     client.onConnect = () => {
       client.subscribe("/sub/chat/room/" + currentFriend.roomId, (data: any) => {
         const msg = JSON.parse(new TextDecoder().decode(data._binaryBody));
-        if (msg.userId !== myProfile.id) {
+        const now = new Date().getTime();
+        if (now - lastMsg.current > 100) {
+          lastMsg.current = now;
           addMessage({
             date: new Date(msg.createdDt),
             id: Math.floor(Math.random() * 10000),
-            me: false,
-            user: currentFriend.nickname,
+            me: msg.userId === myProfile.id,
+            user: (msg.userId === myProfile.id ? myProfile.nickname : currentFriend.nickname),
             body: msg.text,
           });
         }
